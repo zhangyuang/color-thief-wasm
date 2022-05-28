@@ -1,0 +1,16 @@
+{
+  "name": "color-thief-wasm",
+  "version": "1.0.0",
+  "description": "color-thief for webassembly by Rust",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "wasm-pack build",
+    "build:node": "wasm-pack build --target nodejs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
