@@ -1,69 +1,84 @@
-<div align="center">
+# WebAssembly for Color Thief algorithm
 
-  <h1><code>wasm-pack-template</code></h1>
+Use WASM implement Color Thief algorithm for high performance
 
-  <strong>A template for kick starting a Rust and WebAssembly project using <a href="https://github.com/rustwasm/wasm-pack">wasm-pack</a>.</strong>
+## Install
 
-  <p>
-    <a href="https://travis-ci.org/rustwasm/wasm-pack-template"><img src="https://img.shields.io/travis/rustwasm/wasm-pack-template.svg?style=flat-square" alt="Build Status" /></a>
-  </p>
+You can install specify dependcines for different platform.
 
-  <h3>
-    <a href="https://rustwasm.github.io/docs/wasm-pack/tutorials/npm-browser-packages/index.html">Tutorial</a>
-    <span> | </span>
-    <a href="https://discordapp.com/channels/442252698964721669/443151097398296587">Chat</a>
-  </h3>
+### Node.js
 
-  <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub>
-</div>
-
-## About
-
-[**📚 Read this template tutorial! 📚**][template-docs]
-
-This template is designed for compiling Rust libraries into WebAssembly and
-publishing the resulting package to NPM.
-
-Be sure to check out [other `wasm-pack` tutorials online][tutorials] for other
-templates and usages of `wasm-pack`.
-
-[tutorials]: https://rustwasm.github.io/docs/wasm-pack/tutorials/index.html
-[template-docs]: https://rustwasm.github.io/docs/wasm-pack/tutorials/npm-browser-packages/index.html
-
-## 🚴 Usage
-
-### 🐑 Use `cargo generate` to Clone this Template
-
-[Learn more about `cargo generate` here.](https://github.com/ashleygwilliams/cargo-generate)
-
-```
-cargo generate --git https://github.com/rustwasm/wasm-pack-template.git --name my-project
-cd my-project
+```bash
+$ npm i color-thief-wasm
 ```
 
-### 🛠️ Build with `wasm-pack build`
+### Web
 
-```
-wasm-pack build
-```
-
-### 🔬 Test in Headless Browsers with `wasm-pack test`
-
-```
-wasm-pack test --headless --firefox
+```bash
+$ npm i color-thief-wasm-web
 ```
 
-### 🎁 Publish to NPM with `wasm-pack publish`
+### Bundler(Webpack)
 
+```bash
+$ npm i color-thief-wasm-bundler
 ```
-wasm-pack publish
+
+
+## How to use
+
+In Node.js
+
+```js
+const {
+    get_color_thief
+} = require('color-thief-wasm')
+// export function get_color_thief(colors: Uint8Array, pixel_count: number, quality: number, colors_count: number): Array<any>;
+const colors = get_color_thief(data, 64 * 64, 10, 5)
 ```
 
-## 🔋 Batteries Included
+In web
 
-* [`wasm-bindgen`](https://github.com/rustwasm/wasm-bindgen) for communicating
-  between WebAssembly and JavaScript.
-* [`console_error_panic_hook`](https://github.com/rustwasm/console_error_panic_hook)
-  for logging panic messages to the developer console.
-* [`wee_alloc`](https://github.com/rustwasm/wee_alloc), an allocator optimized
-  for small code size.
+```html
+<script type="module">
+    import {
+        get_color_thief
+    } from "./node_modules/color-thief-wasm-web"
+    const colors = get_color_thief(data, 64 * 64, 10, 5)
+</script>
+```
+
+## How to build
+
+Before Build, must install `rust` `wasm-pack` and `pnpm`
+
+```js
+$ npm run build
+```
+
+## benchmark
+
+```bash
+$ npm run bench
+> color-thief-wasm@1.0.2 bench
+> node bench.js
+
+Running "GetColorThief" suite...
+Progress: 100%
+
+  Wasm GetColorThief:
+    12 983 ops/s, ±3.27%   | fastest
+
+  JavaScript GetColorThief:
+    2 021 ops/s, ±6.99%    | slowest, 84.43% slower
+
+Finished 2 cases!
+  Fastest: Wasm GetColorThief
+  Slowest: JavaScript GetColorThief
+```
+
+## Publish
+
+```bash
+$ npm version patch && git push origin master
+```

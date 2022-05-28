@@ -1,7 +1,5 @@
 mod utils;
 
-use std::vec;
-
 use wasm_bindgen::prelude::*;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -35,31 +33,60 @@ macro_rules! console_log {
     // `bare_bones`
     ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
 }
+use utils::set_panic_hook;
+fn create_pixel(img: &[u8], pixel_count: i32, quality: i32) -> Vec<u8> {
+    let mut pixel_arr = vec![];
+    let mut i = 0;
+
+    while i < pixel_count {
+        let offset = i * 4;
+        if offset + 3 > img.len() as i32 {
+            break;
+        }
+        let r = img[(offset + 0) as usize];
+        let g = img[(offset + 1) as usize];
+        let b = img[(offset + 2) as usize];
+        let a = img[(offset + 3) as usize];
+        if a >= 125 && (!(r > 250 && g > 250 && b > 250)) {
+            pixel_arr.push(r);
+            pixel_arr.push(g);
+            pixel_arr.push(b);
+        }
+        i += quality;
+    }
+    pixel_arr
+}
 
 #[wasm_bindgen]
-pub fn color(colors: &[u8]) -> js_sys::Array {
-    for i in colors {
-        console_log!("{:?}", i)
-    }
+pub fn get_color_thief(
+    colors: &[u8],
+    pixel_count: i32,
+    quality: u8,
+    colors_count: u8,
+) -> js_sys::Array {
+    set_panic_hook();
     let array = js_sys::Array::new();
-    array.push(&JsValue::from_str("1"));
-    // color_thief::get_palette(colors, ColorFormat::Rgb, 5, 5)
-    //     .unwrap()
-    //     .iter()
-    //     .for_each(|x| {
-    //         let Color { r, g, b } = x;
-    //         let (r, g, b) = (
-    //             JsValue::from_f64(r),
-    //             JsValue::from_f64(g),
-    //             JsValue::from_f64(b),
-    //         );
-    //         let arr = js_sys::Array::new();
-    //         arr.push(&r);
-    //         arr.push(&g);
-    //         arr.push(&b);
+    let colors = create_pixel(colors, pixel_count, quality as i32);
+    let colors: &[u8] = colors.as_slice();
+    color_thief::get_palette(colors, ColorFormat::Rgb, quality, colors_count)
+        .unwrap()
+        .iter()
+        .for_each(|x| {
+            let Color { r, g, b } = *x;
+            // let (r, g, b) = (
+            //     JsValue::from_f64(r),
+            //     JsValue::from_f64(g),
+            //     JsValue::from_f64(b),
+            // );
+            // let arr = js_sys::Array::new();
+            // arr.push(&r);
+            // arr.push(&g);
+            // arr.push(&b);
 
-    //         array.push(JsValue::f);
-    //     });
+            array.push(&JsValue::from(r));
+            array.push(&JsValue::from(g));
+            array.push(&JsValue::from(b));
+        });
 
     array
 }

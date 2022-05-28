@@ -1,0 +1,10 @@
+const { get_color_thief } = require('../pkg/color_thief_wasm.js')
+const { data } = require('./mock')
+const { getPalette } = require('../getPalette')
+const start = Date.now()
+const foo = getPalette(data, 5, 10)
+console.log(Date.now() - start)
+// console.log(foo)
+get_color_thief(data, 64 * 64, 10, 5)
+
+console.log(Date.now() - start)

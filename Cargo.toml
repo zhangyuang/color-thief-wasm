@@ -1,8 +1,9 @@
 [package]
 name = "color-thief-wasm"
-version = "0.1.0"
-authors = ["yuuangzhang <yuuangzhang@tencent.com>"]
+version = "1.0.0"
+authors = ["yuuangzhang"]
 edition = "2018"
+repository = "https://github.com/zhangyuang/color-thief-wasm"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
