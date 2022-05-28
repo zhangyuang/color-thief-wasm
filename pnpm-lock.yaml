@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@types/node': ^17.0.36
+  '@types/semver': ^7.3.9
   benny: ^3.7.1
   esno: ^0.16.3
   execa: ^6.1.0
@@ -15,6 +17,10 @@ dependencies:
   minimist: 1.2.6
   quantize: 1.0.2
   semver: 7.3.7
+
+devDependencies:
+  '@types/node': 17.0.36
+  '@types/semver': 7.3.9
 
 packages:
 
@@ -67,6 +73,14 @@ packages:
       es-module-lexer: 0.10.5
       get-tsconfig: 3.0.1
     dev: false
+
+  /@types/node/17.0.36:
+    resolution: {integrity: sha512-V3orv+ggDsWVHP99K3JlwtH20R7J4IhI1Kksgc+64q5VxgfRkQG8Ws3MFm/FZOKDYGy9feGFlZ70/HpCNe9QaA==}
+    dev: true
+
+  /@types/semver/7.3.9:
+    resolution: {integrity: sha512-L/TMpyURfBkf+o/526Zb6kd/tchUP3iBDEPjqjb+U2MAJhVRxxrmr2fwpe08E7QsV7YLcpq0tUaQ9O9x97ZIxQ==}
+    dev: true
 
   /ansi-escapes/4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==}

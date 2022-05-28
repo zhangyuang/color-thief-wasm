@@ -1,0 +1,20 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap":true,
+    "declarationMap": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "stripInternal": true,
+    "pretty": true,
+    "declaration": true,
+    "strict": false,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["ES2020", "DOM"],
+    "skipLibCheck": true,
+  }
+}

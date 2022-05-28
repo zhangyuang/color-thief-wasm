@@ -1,6 +1,6 @@
 {
   "name": "color-thief-wasm",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "color-thief for webassembly by Rust",
   "main": "index.js",
   "homepage": "https://github.com/zhangyuang/color-thief-wasm",
@@ -19,5 +19,9 @@
     "minimist": "^1.2.6",
     "quantize": "^1.0.2",
     "semver": "^7.3.7"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.36",
+    "@types/semver": "^7.3.9"
   }
 }

@@ -2,6 +2,8 @@
 
 Use WASM implement Color Thief algorithm for high performance
 
+ref: [color-thief](https://github.com/lokesh/color-thief)
+
 ## Install
 
 You can install specify dependcines for different platform.

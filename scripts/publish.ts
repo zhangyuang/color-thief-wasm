@@ -1,12 +1,12 @@
-const fs = require('fs')
-const { argv } = require('process')
-const { resolve } = require('path')
-const { coerce } = require('semver')
-
+import { writeFile } from 'fs/promises'
+import { argv } from 'process'
+import { resolve } from 'path'
+import { execSync } from 'child_process'
+import { coerce } from 'semver'
+import { execa } from 'execa'
 const minimist = require('minimist')
 const { platform } = minimist(argv)
-const revision = require('child_process')
-  .execSync('git show --pretty=format:"%B" --no-patch')
+const revision = execSync('git show --pretty=format:"%B" --no-patch')
   .toString().trim()
 
 async function publish() {
@@ -19,13 +19,13 @@ async function publish() {
   const dir = platform === 'node' ? 'pkg' : `pkg-${platform}`
   const publishName = platform === 'node' ? '' : `-${platform}`
   const jsonPath = resolve(process.cwd(), `./${dir}/package.json`)
-  const package = require(jsonPath)
-  package.name = `${package.name}${publishName}`
-  package.version = require('../package.json').version
-  fs.writeFileSync(jsonPath, JSON.stringify(package, null, 2) + '\n')
+  const packageContent = require(jsonPath)
+  packageContent.name = `${packageContent.name}${publishName}`
+  packageContent.version = require('../package.json').version
+  await writeFile(jsonPath, JSON.stringify(packageContent, null, 2) + '\n')
   const publicArgs = ['publish', '--access', 'public']
   const cwd = resolve(process.cwd(), `./${dir}`)
-  await execa(npm, publicArgs, { stdio: 'inherit', cwd })
+  await execa('npm', publicArgs, { stdio: 'inherit', cwd })
 }
 
 

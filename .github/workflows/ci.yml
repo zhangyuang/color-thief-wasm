@@ -36,7 +36,7 @@ jobs:
           toolchain: stable
       - name: Install
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-      - run: npm run build:web && node scripts/publish.js --platform web
+      - run: npm run build:web && npx esno scripts/publish.ts --platform web
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -66,7 +66,7 @@ jobs:
       - name: Install
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
-      - run: npm run build && node scripts/publish.js --platform node
+      - run: npm run build && npx esno scripts/publish.ts --platform node
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
