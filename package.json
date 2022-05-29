@@ -7,7 +7,7 @@
   "scripts": {
     "build": "wasm-pack build --target nodejs --out-dir pkg",
     "build:web": "wasm-pack build --target web --out-dir pkg-web",
-    "build:bundler": "wasm-pack build --target bundler --out-dir pkg-bundle",
+    "build:bundler": "wasm-pack build --target bundler --out-dir pkg-bundler",
     "bench": "node bench.js"
   },
   "author": "yuuang",
