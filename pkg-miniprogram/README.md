@@ -26,12 +26,6 @@ $ npm i color-thief-wasm-web
 $ npm i color-thief-wasm-bundler
 ```
 
-### miniprogram
-
-```bash
-$ npm i color-thief-wasm-miniprogram
-```
-
 
 ## How to use
 
@@ -54,18 +48,6 @@ In web
     } from "./node_modules/color-thief-wasm-web"
     const colors = get_color_thief(data, 64 * 64, 10, 5)
 </script>
-```
-
-In miniprogram，we must modify wasm-pack build output content for compatable 
-
-ref: [wasm-pack + miniprogram](https://juejin.cn/post/7041161141162082340)
-
-
-```js
-import init, { get_color_thief } from 'color-thief-wasm-miniprogram/color_thief_wasm'
-// or download project and import init, {get_color_thief} from './pkg-miniprogram/color_thief_wasm'
-await init('color-thief-wasm-miniprogram/color_thief_wasm_bg.wasm')
-const colors = get_color_thief(data, 64 * 64, 10, 5)
 ```
 
 ## How to build
