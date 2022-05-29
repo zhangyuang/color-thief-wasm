@@ -1,6 +1,6 @@
 {
   "name": "color-thief-wasm",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "color-thief for webassembly by Rust",
   "main": "index.js",
   "homepage": "https://github.com/zhangyuang/color-thief-wasm",
