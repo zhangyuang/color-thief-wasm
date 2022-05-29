@@ -34,7 +34,7 @@ macro_rules! console_log {
     ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
 }
 use utils::set_panic_hook;
-fn create_pixel(img: &[u8], pixel_count: i32, quality: i32) -> Vec<u8> {
+fn pre_process(img: &[u8], pixel_count: i32, quality: i32) -> Vec<u8> {
     let mut pixel_arr = vec![];
     let mut i = 0;
 
@@ -65,28 +65,23 @@ pub fn get_color_thief(
     colors_count: u8,
 ) -> js_sys::Array {
     set_panic_hook();
-    let array = js_sys::Array::new();
-    let colors = create_pixel(colors, pixel_count, quality as i32);
+    let colors = pre_process(colors, pixel_count, quality as i32);
     let colors: &[u8] = colors.as_slice();
-    color_thief::get_palette(colors, ColorFormat::Rgb, quality, colors_count)
+    let array = color_thief::get_palette(colors, ColorFormat::Rgb, quality, colors_count)
         .unwrap()
         .iter()
-        .for_each(|x| {
+        .map(|x| {
             let Color { r, g, b } = *x;
-            // let (r, g, b) = (
-            //     JsValue::from_f64(r),
-            //     JsValue::from_f64(g),
-            //     JsValue::from_f64(b),
-            // );
-            // let arr = js_sys::Array::new();
-            // arr.push(&r);
-            // arr.push(&g);
-            // arr.push(&b);
-
-            array.push(&JsValue::from(r));
-            array.push(&JsValue::from(g));
-            array.push(&JsValue::from(b));
-        });
-
+            let (r, g, b) = (
+                JsValue::from(r),
+                JsValue::from(g),
+                JsValue::from(b),
+            );
+            let color_palette = js_sys::Array::new();
+            color_palette.push(&r);
+            color_palette.push(&g);
+            color_palette.push(&b);
+            color_palette
+        }).collect::<js_sys::Array>();
     array
 }
