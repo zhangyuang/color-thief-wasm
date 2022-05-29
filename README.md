@@ -49,10 +49,13 @@ In web
 
 ```html
 <script type="module">
-    import {
+    import init,{
         get_color_thief
-    } from "./node_modules/color-thief-wasm-web"
-    const colors = get_color_thief(data, 64 * 64, 10, 5)
+    } from "./pkg-web/color_thief_wasm.js"
+    init().then(() => {
+      const colors = get_color_thief(data, 64 * 64, 10, 5)
+      console.log(colors)
+    })
 </script>
 ```
 
@@ -63,9 +66,37 @@ ref: [wasm-pack + miniprogram](https://juejin.cn/post/7041161141162082340)
 
 ```js
 import init, { get_color_thief } from 'color-thief-wasm-miniprogram/color_thief_wasm'
-// or download project and import init, {get_color_thief} from './pkg-miniprogram/color_thief_wasm'
-await init('color-thief-wasm-miniprogram/color_thief_wasm_bg.wasm')
+await init('/color-thief-wasm-miniprogram/color_thief_wasm_bg.wasm') // there must provide absolute path
 const colors = get_color_thief(data, 64 * 64, 10, 5)
+```
+
+Or you can copy pkg-miniprogram to your project for convenience that you can 
+
+```bash
+$ tree ./ -I node_modules -L 2
+./
+├── miniprogram
+│   ├── app.json
+│   ├── app.less
+│   ├── app.ts
+│   ├── pages
+│   ├── pkg-miniprogram
+│   └── utils
+├── package-lock.json
+├── package.json
+├── project.config.json
+├── tsconfig.json
+├── typings
+│   ├── index.d.ts
+│   └── types
+```
+
+```js
+// pages/index/index.js
+import init, { get_color_thief } from '../../pkg-miniprogram/color_thief_wasm'
+await init('/pkg-miniprogram/color_thief_wasm_bg.wasm') // there must provide absolute path
+const colors = get_color_thief(data, 64 * 64, 10, 5)
+
 ```
 
 ## How to build

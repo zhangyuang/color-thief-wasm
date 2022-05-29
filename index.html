@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script type="module">
+    import init,{
+        get_color_thief
+    } from "./pkg-web/color_thief_wasm.js"
+    init().then(() => {
+      const colors = get_color_thief([1,2,2,2], 64 * 64, 10, 5)
+      console.log(colors)
+    })
+</script>
+</body>
+</html>
