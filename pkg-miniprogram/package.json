@@ -8,11 +8,6 @@
     "type": "git",
     "url": "https://github.com/zhangyuang/color-thief-wasm"
   },
-  "files": [
-    "color_thief_wasm_bg.wasm",
-    "color_thief_wasm.js",
-    "color_thief_wasm.d.ts"
-  ],
   "main": "color_thief_wasm.js",
   "module": "color_thief_wasm.js",
   "types": "color_thief_wasm.d.ts",
