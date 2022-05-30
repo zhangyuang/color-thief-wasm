@@ -66,7 +66,7 @@ ref: [wasm-pack + miniprogram](https://juejin.cn/post/7041161141162082340)
 
 ```js
 import init, { get_color_thief } from 'color-thief-wasm-miniprogram/color_thief_wasm'
-await init('/color-thief-wasm-miniprogram/color_thief_wasm_bg.wasm') // there must provide absolute path
+await init('/xxxpath/color_thief_wasm_bg.wasm') // there must provide absolute path
 const colors = get_color_thief(data, 64 * 64, 10, 5)
 ```
 
