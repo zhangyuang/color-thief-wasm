@@ -42,14 +42,15 @@ async function getMiniProgramFromWeb() {
   cp(resolve(cwd, './scripts/textencoder.js'), resolve(cwd, './pkg-miniprogram'))
   const re = /input(.*)?import\.meta\.url\);/
   const result = re.exec(source)
-  let shouldReplace = result ? result?.[0] : ''
+  let fetchJudge = result ? result?.[0] : ''
   const code = `
   require('./textencoder');
   const TextDecoder = global.TextDecoder;
   const TextEncoder = global.TextEncoder;
   const WebAssembly = WXWebAssembly;
   const fetch = (e) => { return e; };
-  ${source.replace(shouldReplace, `// there should be annotated ${shouldReplace}`)}
+  ${source.replace(fetchJudge, `// there should be annotated ${fetchJudge}`)
+  .replace('instance instanceof WebAssembly.Instance' , 'false')}
   `
   rm('-rf', resolve(cwd, './pkg-miniprogram/.gitignore'))
   await writeFile(jsonPath, JSON.stringify(packageContent, null, 2) + '\n')
