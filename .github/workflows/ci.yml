@@ -100,9 +100,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  publish-miniprogram:
+  build-miniprogram:
     if: ${{ !contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, '.md')}}
-    name: Publish miniprogram
+    name: Build bundler
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -110,17 +110,22 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 6
-      - name: Install dependencies
-        run: |
-          pnpm i --no-frozen-lockfile
       - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
           cache: "pnpm"
+      - name: Install dependencies
+        run: |
+          pnpm i --no-frozen-lockfile
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Install
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
-      - run: npx esno scripts/publish.ts --platform miniprogram
+      - run: npm run build:miniprogram && npx esno scripts/publish.ts --platform miniprogram
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

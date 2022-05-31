@@ -66,11 +66,11 @@ ref: [wasm-pack + miniprogram](https://juejin.cn/post/7041161141162082340)
 
 ```js
 import init, { get_color_thief } from 'color-thief-wasm-miniprogram/color_thief_wasm'
-await init('/xxxpath/color_thief_wasm_bg.wasm') // there must provide absolute path
+await init('/xxxpath/color_thief_wasm_bg.wasm') // there must provide absolute path in miniprogram
 const colors = get_color_thief(data, 64 * 64, 10, 5)
 ```
 
-Or you can copy pkg-miniprogram to your project for convenience that you can 
+Or you can copy color-thief-wasm-miniprogram to your project for convenience that you can 
 
 ```bash
 $ tree ./ -I node_modules -L 2
@@ -80,7 +80,7 @@ $ tree ./ -I node_modules -L 2
 │   ├── app.less
 │   ├── app.ts
 │   ├── pages
-│   ├── pkg-miniprogram
+│   ├── color-thief-wasm-miniprogram
 │   └── utils
 ├── package-lock.json
 ├── package.json
@@ -93,8 +93,8 @@ $ tree ./ -I node_modules -L 2
 
 ```js
 // pages/index/index.js
-import init, { get_color_thief } from '../../pkg-miniprogram/color_thief_wasm'
-await init('/pkg-miniprogram/color_thief_wasm_bg.wasm') // there must provide absolute path
+import init, { get_color_thief } from '../../color-thief-wasm-miniprogram/color_thief_wasm'
+await init('/color-thief-wasm-miniprogram/color_thief_wasm_bg.wasm') // there must provide absolute path
 const colors = get_color_thief(data, 64 * 64, 10, 5)
 
 ```

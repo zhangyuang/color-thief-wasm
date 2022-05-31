@@ -7,6 +7,7 @@
   "scripts": {
     "build": "wasm-pack build --target nodejs --out-dir pkg",
     "build:web": "wasm-pack build --target web --out-dir pkg-web",
+    "build:miniprogram": "wasm-pack build --target web --out-dir pkg-miniprogram",
     "build:bundler": "wasm-pack build --target bundler --out-dir pkg-bundler",
     "bench": "node bench.js"
   },
@@ -18,10 +19,12 @@
     "execa": "^6.1.0",
     "minimist": "^1.2.6",
     "quantize": "^1.0.2",
-    "semver": "^7.3.7"
+    "semver": "^7.3.7",
+    "shelljs": "^0.8.5"
   },
   "devDependencies": {
     "@types/node": "^17.0.36",
-    "@types/semver": "^7.3.9"
+    "@types/semver": "^7.3.9",
+    "@types/shelljs": "^0.8.11"
   }
 }
