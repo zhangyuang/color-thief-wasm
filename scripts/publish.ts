@@ -15,9 +15,9 @@ async function publish() {
   if (!platform) {
     throw new Error('Please specify platform by node scripts/publish.js --platform web')
   }
-  // if (!coerce(revision)) {
-  //   return
-  // }
+  if (!coerce(revision)) {
+    return
+  }
   const dir = platform === 'node' ? 'pkg' : `pkg-${platform}`
   if (platform === 'miniprogram') {
     await getMiniProgramFromWeb()
@@ -30,7 +30,7 @@ async function publish() {
   await writeFile(jsonPath, JSON.stringify(packageContent, null, 2) + '\n')
   const publicArgs = ['publish', '--access', 'public']
   const pkgCwd = resolve(cwd, `./${dir}`)
-  // await execa('npm', publicArgs, { stdio: 'inherit', cwd: pkgCwd })
+  await execa('npm', publicArgs, { stdio: 'inherit', cwd: pkgCwd })
 }
 
 async function getMiniProgramFromWeb() {
