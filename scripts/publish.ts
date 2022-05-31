@@ -15,9 +15,9 @@ async function publish() {
   if (!platform) {
     throw new Error('Please specify platform by node scripts/publish.js --platform web')
   }
-  if (!coerce(revision)) {
-    return
-  }
+  // if (!coerce(revision)) {
+  //   return
+  // }
   const dir = platform === 'node' ? 'pkg' : `pkg-${platform}`
   if (platform === 'miniprogram') {
     await getMiniProgramFromWeb()
