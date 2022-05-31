@@ -4,13 +4,13 @@ import { resolve } from 'path'
 import { execSync } from 'child_process'
 import { coerce } from 'semver'
 import { execa } from 'execa'
-import {cp} from 'shelljs'
+import { cp, rm } from 'shelljs'
 const minimist = require('minimist')
 const { platform } = minimist(argv)
 const revision = execSync('git show --pretty=format:"%B" --no-patch')
   .toString().trim()
 
-  const cwd = process.cwd()
+const cwd = process.cwd()
 async function publish() {
   if (!platform) {
     throw new Error('Please specify platform by node scripts/publish.js --platform web')
@@ -51,6 +51,7 @@ async function getMiniProgramFromWeb() {
   const fetch = (e) => { return e; };
   ${source.replace(shouldReplace, `// there should be annotated ${shouldReplace}`)}
   `
+  rm('-rf', resolve(cwd, './pkg-miniprogram/.gitignore'))
   await writeFile(jsonPath, JSON.stringify(packageContent, null, 2) + '\n')
   await writeFile(moduleEntry, code)
 }
